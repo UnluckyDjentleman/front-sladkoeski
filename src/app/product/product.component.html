@@ -1,0 +1,52 @@
+<div class="mb-4 mx-auto">
+    <form [formGroup]="filters" (ngSubmit)="onSubmitSearch()" class="grid grid-cols-1 lg:grid-cols-4 gap-7 p-4">
+        <div class="flex flex-col">
+            <label class="text-gray-700 sm:mb-1 mb-2 sm:mt-2 mt-4">Поставщик</label>
+            <select formControlName="customer_id" class="border rounded-md px-3 py-2 border-blue-500 focus:outline-none focus:border-blue-600">
+                <option value="" disabled selected>Любой</option>
+                @for(customer of customers; track customer){
+                    <option value="{{customer.id}}">{{customer.name}}</option>
+                }
+            </select>
+        </div>
+        <div class="flex flex-col">
+            <label class="text-gray-700 sm:mb-1 mb-2 sm:mt-2 mt-4">Категория</label>
+            <select formControlName="category_id" class="border rounded-md px-3 py-2 border-blue-500 focus:outline-none focus:border-blue-600">
+                <option value="" disabled selected>Любая</option>
+                @for(category of categories; track category){
+                    <option value="{{category.id}}">{{category.name}}</option>
+                }
+            </select>
+        </div>
+        <div class="flex flex-col">
+            <label class="text-gray-700 sm:mb-1 mb-2 sm:mt-2 mt-4">Название продукта</label>
+            <input formControlName="name" type="text" class="border border-blue-500 px-3 py-2 rounded-md w-full focus:border-blue-600" placeholder="Введите название продукта"/>
+        </div>
+        <div class="flex flex-col">
+            <button type="submit" class="px-3 py-2 bg-rose-400 text-white rounded-md hover:bg-rose-300 lg:ml-9 mt-9 lg:w-[200px] w-full">Применить фильтры</button>
+        </div>
+    </form>
+</div>
+<div class="mx-auto">
+    @if(products.length===0){
+        <h1 class="text-3xl font-bold tracking-tight text-gray-700 sm:text-3xl mx-auto mb-1">Не удалось найти продукты</h1>
+        <h2 class="text-xl tracking-tight text-gray-700 sm:text-xl mx-auto">Попробуйте изменить запрос</h2>
+    }
+    @else{
+        <div class="lg:col-span-3 lg:col-start-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            @for(product of products; track product){
+                <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-blue-500 dark:bg-gray-800 w-[300px]">
+                    <div class="h-56 w-full mx-auto">
+                    <img [src]="product.photo"/>
+                    </div>
+                    <div class="pt-10 flex flex-col items-center">
+                        <a (click)="onNavigateToProduct(product.id)" class="text-lg font-semibold leading-tight text-blue-500 hover:underline dark:text-white">{{product.name}}</a>
+                        <div class="mt-4 flex items-center justify-between gap-4">
+                            <p class="text-2xl font-extrabold leading-tight text-rose-400 dark:text-white">{{product.price}} р.</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
