@@ -28,7 +28,7 @@ export class DetailsComponent implements OnInit{
   }
 
   fetchProductInfo(id: string){
-    this.httpClient.get<Product>(`${environment.serverPath}/product/${id}`).subscribe(
+    this.httpClient.get<Product>(`${environment.serverPath}/products/${id}`).subscribe(
       (product:Product)=>this.product=product,
       (error)=>console.log(error)   
     )

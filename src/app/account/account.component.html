@@ -1,1 +1,14 @@
-<p>account works!</p>
+@if(!user){
+    <div class="bg-red-50 border border-red-400 rounded text-red-800 text-sm p-4 flex items-start">На данный момент Вы не в системе. Зайдите или зарегистрируйтесь для того, чтобы получить доступ</div>
+}
+@else{
+    <div>Мои заказы</div>
+    @if(orders.length==0){
+        <div>Корзина пуста</div>
+    }
+    @else{
+        <table>
+            
+        </table>
+    }
+}
